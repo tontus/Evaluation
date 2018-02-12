@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <a href="/teachers/add-question">add question</a>
     <ul>
         {% for publisher in object_list %}
             <li>{{ publisher.question }}</li>

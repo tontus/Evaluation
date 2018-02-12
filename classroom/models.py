@@ -9,10 +9,10 @@ class User(AbstractUser):
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    reg_no = models.IntegerField()
+    reg_no = models.IntegerField(null=True, unique=True)
 
     def __str__(self):
-        return self.reg_no
+        return str(self.reg_no)
 
 
 class Question(models.Model):

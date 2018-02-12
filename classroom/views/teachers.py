@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
@@ -13,8 +14,7 @@ from classroom.models import User, Question
 class TeacherSignUpView(CreateView):
     model = User
     form_class = TeacherSignUpForm
-    template_name = 'registration/signup_form.html'
-    kkk = "asdfa"
+    template_name = 'registration/signup_form_teacher.html'
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'teacher'
@@ -31,8 +31,22 @@ class TeacherSignUpView(CreateView):
 
 
 @method_decorator([login_required, teacher_required], name='dispatch')
-class QuestionList(View):
+class QuestionList(ListView):
     template_name = 'classroom/teachers/questions.html'
+    model = Question
 
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
+
+@method_decorator([login_required, teacher_required], name='dispatch')
+class QuestionCreateView(CreateView):
+    model = Question
+    fields = ('question', 'model_answer', 'marks',)
+    template_name = 'classroom/teachers/question_add_form.html'
+
+    def form_valid(self, form):
+        question = form.save(commit=False)
+        question.owner = self.request.user
+        question.save()
+        messages.success(self.request, 'The quiz was created with success! Go ahead and add some questions now.')
+        return redirect('teachers:questions')
+
+
