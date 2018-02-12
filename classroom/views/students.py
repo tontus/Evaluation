@@ -34,6 +34,13 @@ class StudentSignUpView(CreateView):
 class QuestionList(ListView):
     template_name = 'classroom/students/questions.html'
     model = Question
+    context_object_name = 'questions'
+
+    def get_queryset(self):
+        student = self.request.user.student
+        taken_tests = Answer.objects.filter(student=student)
+        queryset = Question.objects.filter().exclude(pk__in=taken_tests)
+        return queryset
 
 
 @login_required

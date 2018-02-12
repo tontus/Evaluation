@@ -2,8 +2,8 @@
 
 {% block content %}
     <ul>
-        {% for publisher in object_list %}
-            <li>{{ publisher.question }}</li>
+        {% for question in questions %}
+            <li><a href="/{{ question.id }}">{{ question.question }}</a></li>
         {% endfor %}
     </ul>
 {% endblock %}
