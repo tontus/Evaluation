@@ -4,8 +4,8 @@
     <a href="/teachers/add-question">add question</a>
 
     <ul>
-        {% for publisher in object_list %}
-            <li>{{ publisher.question }}</li>
+        {% for question in object_list %}
+            <li><a href="{% url 'teachers:score' question.pk %}">{{ question.question }}</a></li>
         {% endfor %}
     </ul>
 {% endblock %}

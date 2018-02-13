@@ -52,3 +52,11 @@ class QuestionCreationForm(forms.Form):
 class TakeTestForm(forms.Form):
     answer = forms.CharField(widget=forms.Textarea(attrs={'class': 'answer'}))
 
+
+class ScoreUpdateForm(forms.Form):
+    answer_id = forms.IntegerField()
+    given_score = forms.FloatField()
+    CHOICES = [('calculated_score', 'Calculated Score'),
+               ('given_score', 'Given Score')]
+
+    final_score = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect())

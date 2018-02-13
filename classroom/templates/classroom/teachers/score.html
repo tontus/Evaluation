@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <ul>
+        {% for answer,form in list %}
+            <form action="/teachers/questions/{{ answer.question.id }}/score" method="post">
+            {% csrf_token %}
+            <li>{{ answer.student.reg_no }} {{ answer.text }} {{ answer.given_score }} {{ answer.calculated_score }} {{ answer.final_score }}</li>
+            {{ form }}
+            <input type="submit" value="Submit"/>
+            </form>
+        {% endfor %}
+    </ul>
+{% endblock %}
