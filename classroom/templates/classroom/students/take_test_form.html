@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{{ question.question }}
+<form action="/students/questions/{{ question.id }}/" method="post">
+    {% csrf_token %}
+    {{ form.answer }}
+    <input type="submit" value="Submit"/>
+</form>
+
+</body>
+</html>

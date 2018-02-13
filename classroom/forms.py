@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 
-from classroom.models import Student, User
+from classroom.models import Student, User, Answer
 
 
 class StudentSignUpForm(UserCreationForm):
@@ -47,3 +47,8 @@ class QuestionCreationForm(forms.Form):
         widget=forms.CheckboxSelectMultiple,
         required=True
     )
+
+
+class TakeTestForm(forms.Form):
+    answer = forms.CharField(widget=forms.Textarea(attrs={'class': 'answer'}))
+

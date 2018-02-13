@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, render
 from ..decorators import student_required
 from django.contrib.auth.decorators import login_required
 
-from ..forms import StudentSignUpForm
+from ..forms import StudentSignUpForm, TakeTestForm
 from ..models import User, Answer, Question, Student
 
 
@@ -38,19 +38,30 @@ class QuestionList(ListView):
 
     def get_queryset(self):
         student = self.request.user.student
-        taken_tests = Answer.objects.filter(student=student)
-        queryset = Question.objects.filter().exclude(pk__in=taken_tests)
+        queryset = Question.objects.exclude(answer_question__student=student)
         return queryset
 
 
 @login_required
 @student_required  # <-- here!
-def give_answer(request, pk):
+def take_test(request, pk):
     question = get_object_or_404(Question, pk=pk)
     student = request.user.student
+    if Answer.objects.filter(student=student, question=question).exists():
+        return redirect('students:questions')
+    if request.method == 'POST':
+        form = TakeTestForm(request.POST)
+        if form.is_valid():
+            answer = Answer()
+            answer.student = student
+            answer.question = question
+            answer.text = form.cleaned_data['answer']
+            answer.save()
+            return redirect('students:questions')
+    else:
+        form = TakeTestForm()
 
-    # body of the view...
-
-    return render(request, 'classroom/students/give_answer_form.html', {
-        'question': question
-    })
+        return render(request, 'classroom/students/take_test_form.html', {
+            'question': question,
+            'form': form,
+        })

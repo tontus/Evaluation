@@ -26,12 +26,12 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
-    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='quiz_answers')
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answer_question')
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='answer_student')
     text = models.TextField('Answer')
     calculated_score = models.FloatField(default=-1)
     given_score = models.FloatField(default=0)
     final_score = models.FloatField(default=-1)
 
     def __str__(self):
-        return self.student.reg_no
+        return str(self.student.reg_no)

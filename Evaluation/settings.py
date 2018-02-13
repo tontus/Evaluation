@@ -119,3 +119,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join('static'),)
 AUTH_USER_MODEL = 'classroom.User'
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)

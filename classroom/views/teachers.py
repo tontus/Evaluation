@@ -34,6 +34,12 @@ class TeacherSignUpView(CreateView):
 class QuestionList(ListView):
     template_name = 'classroom/teachers/questions.html'
     model = Question
+    context_object_name = 'questions'
+
+    def get_queryset(self):
+        teacher = self.request.user
+        queryset = Question.objects.filter(owner= teacher)
+        return queryset
 
 
 @method_decorator([login_required, teacher_required], name='dispatch')
@@ -50,3 +56,5 @@ class QuestionCreateView(CreateView):
         return redirect('teachers:questions')
 
 
+def score(request):
+    return None

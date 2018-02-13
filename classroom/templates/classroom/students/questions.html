@@ -3,7 +3,7 @@
 {% block content %}
     <ul>
         {% for question in questions %}
-            <li><a href="/{{ question.id }}">{{ question.question }}</a></li>
+            <li>{{ question.question }} <a href="{% url 'students:take_test' question.pk %}" class="btn btn-primary">Start Test</a></li>
         {% endfor %}
     </ul>
 {% endblock %}
