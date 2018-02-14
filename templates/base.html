@@ -9,9 +9,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'fontello-8276abb7/css/fontello.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
 
-  <script src={% static 'js/jquery.min.js' %}></script>
-  <script src={% static 'js/popper.min.js' %}></script>
-  <script src={% static 'js/bootstrap.min.js' %}></script>
+    <script src={% static 'js/jquery.min.js' %}></script>
+    <script src={% static 'js/popper.min.js' %}></script>
+    <script src={% static 'js/bootstrap.min.js' %}></script>
     {% if user.is_authenticated and user.is_teacher %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/teachers.css' %}">
     {% else %}
@@ -24,10 +24,11 @@
         <div class="col-md-10 col-sm-12">
             <div class="row">
                 <div class="col-6">
-                    <h1 class="logo">
-                        <a href="{% url 'home' %}">
-                            &nbspHome
-                            {% if user.is_authenticated %}
+                    {% if user.is_authenticated %}
+                        <h1 class="logo">
+                            <a href="{% url 'home' %}">
+                                &nbspHome
+
                                 {% if user.is_teacher %}
                                     <span class=" icon-bookmarks" data-toggle="tooltip" data-placement="right"
                                           title="Teacher profile"></span>
@@ -35,32 +36,47 @@
                                     <span class=" icon-bookmark" data-toggle="tooltip" data-placement="right"
                                           title="Student profile"></span>
                                 {% endif %}
-                            {% endif %}
-                        </a>
-                    </h1>
+
+                            </a>
+                        </h1>
+                    {% endif %}
                 </div>
-                <div class="col-6 text-right">
+                <div class="col-6">
                     {% if user.is_authenticated %}
+                        <div class="text-right">
                         <p class="pt-3">Logged in as <strong>{{ user.username }}</strong>. <a href="{% url 'logout' %}">Log
                             out</a>.</p>
+                        </div>
                     {% else %}
+
                         <a href="{% url 'login' %}" class="btn btn-light" role="button">Log in</a>
-                        <a href="{% url 'signup' %}" class="btn btn-primary" role="button">Sign up</a>
+                        <a href="{% url 'signup' %}" class="btn btn-warning" role="button">Sign up</a>
                     {% endif %}
                 </div>
             </div>
 
-                    {% for message in messages %}
-                        <div class="alert {{ message.tags }} alert-dismissible fade show alert-success" role="alert">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            {{ message }}
-{#                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
-{#                                <span aria-hidden="true">&times;</span>#}
-{#                            </button>#}
-                        </div>
-                    {% endfor %}
-                    {% block content %}
-                    {% endblock %}
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <div class="alert {{ message.tags }} alert-dismissible fade show alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                    {#                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
+                    {#                                <span aria-hidden="true">&times;</span>#}
+                    {#                            </button>#}
+                </div>
+
+                {% else %}
+                <div class="alert {{ message.tags }} alert-dismissible fade show alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                    {#                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
+                    {#                                <span aria-hidden="true">&times;</span>#}
+                    {#                            </button>#}
+                </div>
+                {% endif %}
+            {% endfor %}
+            {% block content %}
+            {% endblock %}
 
 
         </div>

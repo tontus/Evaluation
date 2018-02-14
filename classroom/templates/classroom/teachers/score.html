@@ -2,11 +2,11 @@
 
 {% block content %}
 
-        <div class="card" style="margin-bottom: 20px; background-color: #ECECEA">
+        <div class="card" style="margin-bottom: 20px; ">
         <div class="card-body">
             <h5>Question: {{ question.question }}</h5>
-        <p>MArks: {{ question.marks }}</p>
-            <p>Model Answer: {{ question.model_answer }}</p>
+            <p><span class="right-title-text">Marks: </span> &nbsp;{{ question.marks }}</p>
+            <p><span class="right-title-text">Model Answer: </span>&nbsp;{{ question.model_answer }}</p>
             {% if list_count == 0 %}
             <h5>No answer submitted yet!</h5>
             {% endif %}
@@ -17,7 +17,7 @@
 
 
     {% for answer,form in list %}
-        <div class="card" style="margin-bottom: 20px; background-color: #ECECEA">
+        <div class="card" style="margin-bottom: 20px; ">
         <h3 class="card-title"><span style="background-color: #558C89; color: #ECECEA">Registration no: </span>
                         &nbsp {{ answer.student.reg_no }}</h3>
             <div class="card-body">
