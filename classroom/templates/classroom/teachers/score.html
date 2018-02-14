@@ -2,35 +2,43 @@
 
 {% block content %}
     {{ l }}
-    <ul xmlns="http://www.w3.org/1999/html">
-        {% for answer,form in list %}
-            <li>
+    {% for answer,form in list %}
+        <div class="card" style="margin-bottom: 20px; background-color: #ECECEA">
+        <h3 class="card-title"><span style="background-color: #558C89; color: #ECECEA">Registration no: </span>
+                        &nbsp {{ answer.student.reg_no }}</h3>
+            <div class="card-body">
                 <form action="" method="post">
                     {% csrf_token %}
-                    <p>Registration no: {{ answer.student.reg_no }}</p>
-                    <p>Answer: {{ answer.text }}</p>
-                    <div class="row">
-                        <div class="col-6">
-                            <p>Given Score: {{ form.given_score }}</p>
-                            <p> Calculated Score:
-                                {% if answer.calculated_score != -1 %}
-                                    {{ answer.calculated_score }}
 
-                                {% else %}
-                                    <button class="icon-arrows-cw" onClick="window.location.href=window.location.href"></button>
-                                    </p>
+                    <p><span class="right-title-text">Answer:</span> &nbsp{{ answer.text }}</p>
 
-                                {% endif %}
-                            <p> Final Score: {{ answer.final_score }}</p>
-                        </div>
-                        <div class="col-6">
-                            {{ form.final_score }}
-                            <p hidden>{{ form.answer_id }}</p>
-                        </div>
-                    </div>
+                    <p><span class="right-title-text">Given Score:</span>&nbsp{{ form.given_score }}</p>
+                    <p><span class="right-title-text">Calculated Score:</span> &nbsp
+                        {% if answer.calculated_score != -1 %}
+                            {{ answer.calculated_score }}
+
+                        {% else %}
+                            <button class="icon-arrows-cw btn btn-light"
+                                    onClick="window.location.href=window.location.href"></button>
+
+                        {% endif %}
+                    </p>
+                    <p><span class="right-title-text">Select which value will be the final score:</span>&nbsp
+                        {% for choice in form.final_score %}
+                            <span class="radio">{{ choice.tag }}</span>
+                            {{ choice.choice_label }}
+                            &nbsp
+                        {% endfor %}
+                    </p>
+                    <p><span class="right-title-text">Final Score:</span> &nbsp{{ answer.final_score }}</p>
+
+
+                    <p hidden>{{ form.answer_id }}</p>
+
                     <input type="submit" value="Submit"/>
                 </form>
-            </li>
-        {% endfor %}
-    </ul>
+            </div>
+        </div>
+    {% endfor %}
+
 {% endblock %}

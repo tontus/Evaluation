@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 from ..forms import StudentSignUpForm, TakeTestForm
 from ..models import User, Answer, Question, Student
+from ..tasks import start_calculation
 
 
 class StudentSignUpView(CreateView):
@@ -57,6 +58,7 @@ def take_test(request, pk):
             answer.question = question
             answer.text = form.cleaned_data['answer']
             answer.save()
+            start_calculation.delay(answer.id)
             return redirect('students:questions')
     else:
         form = TakeTestForm()

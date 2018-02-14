@@ -43,7 +43,6 @@ class QuestionList(ListView):
         return queryset
 
 
-
 @method_decorator([login_required, teacher_required], name='dispatch')
 class QuestionCreateView(CreateView):
     model = Question
@@ -57,9 +56,9 @@ class QuestionCreateView(CreateView):
         messages.success(self.request, 'The quiz was created with success! Go ahead and add some questions now.')
         return redirect('teachers:questions')
 
+
 @login_required()
 def score(request, pk):
-
     if request.method == 'POST':
         form = ScoreUpdateForm(request.POST)
 
@@ -79,10 +78,18 @@ def score(request, pk):
     answers = Answer.objects.filter(question=question)
     forms = []
     for answer in answers:
-        data = {
-            'answer_id': answer.id,
-            'given_score': answer.given_score
-        }
+        if answer.final_score == answer.calculated_score:
+            data = {
+                'answer_id': answer.id,
+                'given_score': answer.given_score,
+                'final_score': '1'
+            }
+        else:
+            data = {
+                'answer_id': answer.id,
+                'given_score': answer.given_score,
+                'final_score': '2'
+            }
         form = ScoreUpdateForm(data)
         forms.append(form)
 
