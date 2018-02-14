@@ -1,7 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {{ l }}
+
+        <div class="card" style="margin-bottom: 20px; background-color: #ECECEA">
+        <div class="card-body">
+            <h5>Question: {{ question.question }}</h5>
+        <p>MArks: {{ question.marks }}</p>
+            <p>Model Answer: {{ question.model_answer }}</p>
+            {% if list_count == 0 %}
+            <h5>No answer submitted yet!</h5>
+            {% endif %}
+
+        </div>
+
+        </div>
+
+
     {% for answer,form in list %}
         <div class="card" style="margin-bottom: 20px; background-color: #ECECEA">
         <h3 class="card-title"><span style="background-color: #558C89; color: #ECECEA">Registration no: </span>

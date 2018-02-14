@@ -110,9 +110,11 @@ def score(request, pk):
         forms.append(form)
 
     lists = zip(answers, forms)
+    list_count = answers.count()
     return render(request, 'classroom/teachers/score.html', {
         'question': question,
         'answers': answers,
         'list': lists,
+        'list_count': list_count
 
     })
