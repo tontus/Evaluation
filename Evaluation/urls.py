@@ -6,6 +6,7 @@ from classroom.views import classroom, students, teachers
 
 urlpatterns = [
     path('', include('classroom.urls')),
+    path('', classroom.home, name='home'),
     path('admin/', admin.site.urls),
     path('accounts/login/', views.login_view, name='login'),
     path('accounts/logout/', views.logout_view, name='logout'),
