@@ -42,7 +42,7 @@ class TeacherSignUpView(CreateView):
 #         queryset = Question.objects.filter(owner=teacher)
 #         return queryset
 
-
+@teacher_required()
 @login_required()
 def questionList(request):
     answer_counts = []
@@ -68,11 +68,12 @@ class QuestionCreateView(CreateView):
         question = form.save(commit=False)
         question.owner = self.request.user
         question.save()
-        messages.success(self.request, 'The quiz was created with success! Go ahead and add some questions now.')
+        messages.success(self.request, 'The question was created with success!')
         return redirect('teachers:questions')
 
 
 @login_required()
+@teacher_required()
 def score(request, pk):
     if request.method == 'POST':
         form = ScoreUpdateForm(request.POST)

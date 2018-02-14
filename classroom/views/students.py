@@ -59,6 +59,7 @@ def take_test(request, pk):
             answer.text = form.cleaned_data['answer']
             answer.save()
             start_calculation.delay(answer.id)
+            messages.success(request, 'The answer was submitted with success!')
             return redirect('students:questions')
     else:
         form = TakeTestForm()
