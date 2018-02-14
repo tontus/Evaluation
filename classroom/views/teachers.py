@@ -43,6 +43,7 @@ class QuestionList(ListView):
         return queryset
 
 
+
 @method_decorator([login_required, teacher_required], name='dispatch')
 class QuestionCreateView(CreateView):
     model = Question
@@ -56,7 +57,7 @@ class QuestionCreateView(CreateView):
         messages.success(self.request, 'The quiz was created with success! Go ahead and add some questions now.')
         return redirect('teachers:questions')
 
-
+@login_required()
 def score(request, pk):
 
     if request.method == 'POST':
@@ -90,5 +91,5 @@ def score(request, pk):
         'question': question,
         'answers': answers,
         'list': lists,
-        
+
     })

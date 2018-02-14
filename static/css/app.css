@@ -1,6 +1,12 @@
-.logo {
-  font-family: 'Clicker Script', cursive;
+body {
+
+    font-family: "Segoe UI";
+
+    text-decoration: none !important;
 }
+/*.logo {*/
+  /*font-family: 'Clicker Script', cursive;*/
+/*}*/
 
 .logo a {
   color: #212529;

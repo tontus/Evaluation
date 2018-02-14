@@ -1,15 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<form method="post" action="/teachers/add-question">
-    {% csrf_token %}
-    {{ form }}
-    <input type="hidden" name="next" value="{{ next }}">
-    <button type="submit" class="btn btn-success">Sign up</button>
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="post" action="/teachers/add-question">
+        {#    {% csrf_token %}#}
+        {#    {{ form }}#}
+        {#    <input type="hidden" name="next" value="{{ next }}">#}
+        {#    <button type="submit" class="btn btn-success"> Submit#}
+        {#    </button>#}
+
+
+        <div class="form-group">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-6">
+                    <p>Question:</p>
+                    {{ form.question }}
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <p>Model Answer:</p>
+                    {{ form.model_answer }}
+                </div>
+            </div>
+            <div>
+                <p>Marks:</p>
+                {{ form.marks }}
+            </div>
+            <p></p>
+            <input type="submit" value="Submit" class="btn btn-primary"/>
+        </div>
+    </form>
+{% endblock %}
