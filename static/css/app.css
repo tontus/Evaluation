@@ -14,12 +14,19 @@ body {
     background-color:#D9853B ;
 }
 .logo{
-    padding-bottom: -20px;
+    margin-bottom: -20px;
+}
+.logo a:hover{
+    color: black;
 }
 
 
 .right-title-text{
     text-decoration: underline;
+}
+.btn-warning{
+    background: #D9853B !important;
+    color: #dee2e6;
 }
 /*.list-group-formset label {*/
   /*display: none;*/
