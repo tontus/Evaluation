@@ -31,16 +31,31 @@ class TeacherSignUpView(CreateView):
     #     return render(request, self.template_name, {'form': form})
 
 
-@method_decorator([login_required, teacher_required], name='dispatch')
-class QuestionList(ListView):
-    template_name = 'classroom/teachers/questions.html'
-    model = Question
-    context_object_name = 'questions'
+# @method_decorator([login_required, teacher_required], name='dispatch')
+# class QuestionList(ListView):
+#     template_name = 'classroom/teachers/questions.html'
+#     model = Question
+#     context_object_name = 'questions'
+#
+#     def get_queryset(self):
+#         teacher = self.request.user
+#         queryset = Question.objects.filter(owner=teacher)
+#         return queryset
 
-    def get_queryset(self):
-        teacher = self.request.user
-        queryset = Question.objects.filter(owner=teacher)
-        return queryset
+
+@login_required()
+def questionList(request):
+    answer_counts = []
+    teacher = request.user
+    questions = Question.objects.filter(owner=teacher)
+    for question in questions:
+        answer_count = Answer.objects.filter(question=question).count()
+        answer_counts.append(answer_count)
+    infos = zip(questions, answer_counts)
+
+    return render(request, 'classroom/teachers/questions.html', {
+        'infos': infos,
+    })
 
 
 @method_decorator([login_required, teacher_required], name='dispatch')

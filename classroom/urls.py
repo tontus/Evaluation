@@ -5,7 +5,7 @@ from .views import teachers, students
 
 urlpatterns = [
     path('teachers/', include(([
-                                   path('questions', teachers.QuestionList.as_view(), name='questions'),
+                                   path('questions', teachers.questionList, name='questions'),
                                    path('add-question', teachers.QuestionCreateView.as_view(), name='add-question'),
                                    path('questions/<int:pk>/score', teachers.score, name='score'),
                                ], 'classroom'), namespace='teachers')),

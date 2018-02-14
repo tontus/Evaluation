@@ -1,13 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form method="post" action="/teachers/add-question">
-        {#    {% csrf_token %}#}
-        {#    {{ form }}#}
-        {#    <input type="hidden" name="next" value="{{ next }}">#}
-        {#    <button type="submit" class="btn btn-success"> Submit#}
-        {#    </button>#}
-
+    <div class="card"><div class="card-body"><form method="post" action="/teachers/add-question">
 
         <div class="form-group">
             {% csrf_token %}
@@ -29,7 +23,7 @@
                 {{ form.marks }}
             </div>
             <p></p>
-            <input type="submit" value="Submit" class="btn btn-primary"/>
+            <input type="submit" value="Submit" class="btn btn-warning"/>
         </div>
-    </form>
+    </form></div></div>
 {% endblock %}

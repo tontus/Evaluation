@@ -7,6 +7,9 @@ body {
 /*.logo {*/
   /*font-family: 'Clicker Script', cursive;*/
 /*}*/
+a{
+    text-decoration: none;
+}
 
 .logo a {
   color: #ECECEA;
@@ -26,7 +29,7 @@ body {
 }
 .btn-warning{
     background: #D9853B !important;
-    color: #dee2e6;
+    color: #ECECEA;
 }
 /*.list-group-formset label {*/
   /*display: none;*/
