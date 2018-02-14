@@ -2,24 +2,25 @@
 
 {% block content %}
 
-        <div class="card" style="margin-bottom: 20px; ">
+    <div class="card" style="margin-bottom: 20px; ">
         <div class="card-body">
             <h5>Question: {{ question.question }}</h5>
             <p><span class="right-title-text">Marks: </span> &nbsp;{{ question.marks }}</p>
             <p><span class="right-title-text">Model Answer: </span>&nbsp;{{ question.model_answer }}</p>
+            <a href="{% url 'teachers:log' question.id %}" class="btn btn-warning btn-lg" role="button">Download Log</a>
             {% if list_count == 0 %}
-            <h5>No answer submitted yet!</h5>
+                <h5>No answer submitted yet!</h5>
             {% endif %}
 
         </div>
 
-        </div>
+    </div>
 
 
     {% for answer,form in list %}
         <div class="card" style="margin-bottom: 20px; ">
-        <h3 class="card-title"><span style="background-color: #558C89; color: #ECECEA">Registration no: </span>
-                        &nbsp {{ answer.student.reg_no }}</h3>
+            <h3 class="card-title"><span style="background-color: #558C89; color: #ECECEA">Registration no: </span>
+                &nbsp {{ answer.student.reg_no }}</h3>
             <div class="card-body">
                 <form action="" method="post">
                     {% csrf_token %}

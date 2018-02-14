@@ -1,3 +1,5 @@
+import csv
+
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -118,3 +120,22 @@ def score(request, pk):
         'list_count': list_count
 
     })
+
+
+@login_required()
+@teacher_required()
+def csv_download(request, pk):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="log.csv"'
+
+    writer = csv.writer(response)
+    log = Answer.objects.filter(question_id=pk)
+    question = Question.objects.get(id=pk)
+    writer.writerow(['Question:',question.question,'Marks:',question.marks])
+    writer.writerow(['Model Answer:',question.model_answer])
+    writer.writerow(['Registration Number', 'Answer', 'Calculated Score', 'Given Score', 'Final Score'])
+    for data in log:
+        writer.writerow([data.student.reg_no, data.text, data.calculated_score, data.given_score, data.final_score])
+
+    return response

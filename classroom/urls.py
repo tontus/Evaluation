@@ -8,6 +8,7 @@ urlpatterns = [
                                    path('questions', teachers.questionList, name='questions'),
                                    path('add-question', teachers.QuestionCreateView.as_view(), name='add-question'),
                                    path('questions/<int:pk>/score', teachers.score, name='score'),
+                                   path('questions/<int:pk>/log', teachers.csv_download, name='log'),
                                ], 'classroom'), namespace='teachers')),
 
     path('students/', include(([
