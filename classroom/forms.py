@@ -42,7 +42,7 @@ class QuestionCreationForm(forms.Form):
     question = forms.CharField()
     model_answer = forms.CharField(widget=forms.Textarea(attrs={'class': 'model_answer'}))
     marks = forms.IntegerField()
-    interests = forms.ModelMultipleChoiceField(
+    students = forms.ModelMultipleChoiceField(
         queryset=Student.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=True
@@ -56,7 +56,7 @@ class TakeTestForm(forms.Form):
 class ScoreUpdateForm(forms.Form):
     answer_id = forms.IntegerField()
     given_score = forms.FloatField()
-    CHOICES = [('calculated_score', 'Calculated Score'),
-               ('given_score', 'Given Score')]
+    CHOICES = [('1', 'Calculated Score'),
+               ('2', 'Given Score')]
 
     final_score = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect())

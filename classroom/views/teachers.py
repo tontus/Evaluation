@@ -58,12 +58,20 @@ class QuestionCreateView(CreateView):
 
 
 def score(request, pk):
+
     if request.method == 'POST':
         form = ScoreUpdateForm(request.POST)
+
         if form.is_valid():
             answer_id = form.cleaned_data['answer_id']
-            answer = Answer.objects.get(id= answer_id)
+            answer = Answer.objects.get(id=answer_id)
             answer.given_score = form.cleaned_data['given_score']
+            choice = form.cleaned_data['final_score']
+
+            if choice is '2':
+                answer.final_score = answer.given_score
+            elif choice == '1':
+                answer.final_score = answer.calculated_score
             answer.save()
 
     question = get_object_or_404(Question, pk=pk)
@@ -71,8 +79,8 @@ def score(request, pk):
     forms = []
     for answer in answers:
         data = {
-            'answer_id':answer.id,
-            'given_score':answer.given_score
+            'answer_id': answer.id,
+            'given_score': answer.given_score
         }
         form = ScoreUpdateForm(data)
         forms.append(form)
@@ -81,5 +89,6 @@ def score(request, pk):
     return render(request, 'classroom/teachers/score.html', {
         'question': question,
         'answers': answers,
-        'list': lists
+        'list': lists,
+        
     })
