@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">Username</div>
+                <div class="col">Score</div>
+                <div class="col">Answered</div>
+                <div class="col">Percentage</div>
+
+            </div>
+            <ol class="list-group ordered-list-group" start="1">
+                {% for datum in data %}
+                    <li class="list-group-item ordered-list">
+                        <div class="row">
+                            <div class="col">{{ datum.0.user.username }}</div>
+                            <div class="col">{{ datum.2 }}</div>
+                            <div class="col">{{ datum.1 }}</div>
+                            <div class="col">{{ datum.3 }}%</div>
+
+                        </div>
+                    </li>
+                {% endfor %}
+
+            </ol>
+        </div>
+    </div>
+{% endblock %}

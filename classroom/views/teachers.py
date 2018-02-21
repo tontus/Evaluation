@@ -90,7 +90,10 @@ def score(request, pk):
                 answer.final_score = answer.given_score
             elif choice == '1':
                 answer.final_score = answer.calculated_score
-            answer.save()
+            if answer.final_score > answer.question.marks:
+                messages.error(request, 'Final score can not be bigger than total marks '+str(answer.question.marks)+'!')
+            else:
+                answer.save()
 
     question = get_object_or_404(Question, pk=pk)
     answers = Answer.objects.filter(question=question)

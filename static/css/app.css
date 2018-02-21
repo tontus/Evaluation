@@ -50,3 +50,11 @@ a{
     border: 1px solid #ff5722;
     color: #ff5722;
 }
+
+.ordered-list{
+    display: list-item;
+}
+.ordered-list-group{
+    list-style: decimal inside;
+}
+
