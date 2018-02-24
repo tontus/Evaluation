@@ -27,7 +27,7 @@ class StudentSignUpView(CreateView):
             login(self.request, user)
             return redirect('students:questions')
         except AttributeError:
-            messages.error(self.request, 'This registration number is already registered.')
+            messages.warning(self.request, 'This registration number is already registered.')
             return redirect('student_signup')
 
 
