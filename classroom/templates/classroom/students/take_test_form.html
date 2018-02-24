@@ -1,17 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="card">
-        <div class="card-body">
-            <h5>Question: {{ question.question }}</h5>
-            <p>by {{ question.owner.username }} &nbsp;Marks: {{ question.marks }}</p>
-            <form action="/students/questions/{{ question.id }}/" method="post">
-                <div class="form-group">{% csrf_token %}
-                    <p for="id_answer">Answer:</p>
-                    {{ form.answer }}
+    <div class="container">
+        <div class="row" >
+            <div class="col-3">
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header" style="background-color: #1ed88b">
+                         <h4 style="color: #FFFFFF">Question: {{ question.question }}</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <p>by {{ question.owner.username }} &nbsp;Marks: {{ question.marks }}</p>
+                        <form action="/students/questions/{{ question.id }}/" method="post">
+                            <div class="form-group">{% csrf_token %}
+                                <p for="id_answer">Answer:</p>
+                                {{ form.answer }}
+                            </div>
+                            <input type="submit" value="Submit" class="btn btn-outline-success"/>
+                        </form>
+                    </div>
                 </div>
-                <input type="submit" value="Submit" class="btn btn-warning"/>
-            </form>
+            </div>
+            <div class="col-3">
+
+            </div>
         </div>
     </div>
 

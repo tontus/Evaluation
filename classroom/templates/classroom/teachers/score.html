@@ -1,59 +1,76 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    <div class="card" style="margin-bottom: 20px; ">
-        <div class="card-body">
-            <h5>Question: {{ question.question }}</h5>
-            <p><span class="right-title-text">Marks: </span> &nbsp;{{ question.marks }}</p>
-            <p><span class="right-title-text">Model Answer: </span>&nbsp;{{ question.model_answer }}</p>
-            <a href="{% url 'teachers:log' question.id %}" class="btn btn-warning btn-lg" role="button">Download Log</a>
-            {% if list_count == 0 %}
-                <h5>No answer submitted yet!</h5>
-            {% endif %}
-
-        </div>
-
-    </div>
-
-
-    {% for answer,form in list %}
+    <div class="container">
         <div class="card" style="margin-bottom: 20px; ">
-            <h3 class="card-title"><span style="background-color: #558C89; color: #ECECEA">Registration no: </span>
-                &nbsp {{ answer.student.reg_no }}</h3>
             <div class="card-body">
-                <form action="" method="post">
-                    {% csrf_token %}
-
-                    <p><span class="right-title-text">Answer:</span> &nbsp{{ answer.text }}</p>
-
-                    <p><span class="right-title-text">Given Score:</span>&nbsp{{ form.given_score }}</p>
-                    <p><span class="right-title-text">Calculated Score:</span> &nbsp
-                        {% if answer.calculated_score != -1 %}
-                            {{ answer.calculated_score }}
-
+                <div class="row">
+                    <div class="col-6"><h5><strong>Question:</strong> {{ question.question }}</h5>
+                        <p><span class="right-title-text">Marks: </span> &nbsp;{{ question.marks }}</p>
+                        <p><span class="right-title-text">Model Answer: </span>&nbsp;{{ question.model_answer }}</p>
+                    </div>
+                    <br>
+                    <div class="col-6">
+                        {% if list_count == 0 %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong> No Answer submitted yet!</strong>
+                            </div>
                         {% else %}
-                            <button class="icon-arrows-cw btn btn-light"
-                                    onClick="window.location.href=window.location.href"></button>
+                            <a href="{% url 'teachers:log' question.id %}" class="btn btn-success btn-lg" role="button"><i
+                                    class="icon-download"></i>Download
+                                Log</a>
+                        {% endif %}</div>
+                </div>
 
-                        {% endif %}
-                    </p>
-                    <p><span class="right-title-text">Select which value will be the final score:</span>&nbsp
-                        {% for choice in form.final_score %}
-                            <span class="radio">{{ choice.tag }}</span>
-                            {{ choice.choice_label }}
-                            &nbsp
-                        {% endfor %}
-                    </p>
-                    <p><span class="right-title-text">Final Score:</span> &nbsp{{ answer.final_score }}</p>
-
-
-                    <p hidden>{{ form.answer_id }}</p>
-
-                    <button type="submit" value="Submit" class="btn btn-warning">Submit</button>
-                </form>
             </div>
+
         </div>
-    {% endfor %}
+
+
+        {% for answer,form in list %}
+            <div class="card" style="margin-bottom: 20px; ">
+                <h3 class="card-title"><span style="background-color: #1dba79; color: #FFFFFF">&nbsp;Registration no: </span>
+                    &nbsp {{ answer.student.reg_no }}</h3>
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-6"><p><span class="right-title-text">Answer:</span> &nbsp{{ answer.text }}
+                            </p>
+
+                                <p><span class="right-title-text">Given Score:</span>&nbsp{{ form.given_score }}</p>
+                                <p><span class="right-title-text">Calculated Score:</span>
+                                    {% if answer.calculated_score != -1 %}
+                                        {{ answer.calculated_score }}
+
+                                    {% else %}
+                                        <i class="icon-spin3 animate-spin btn btn-light"
+                                           onClick="window.location.href=window.location.href"></i>
+
+                                    {% endif %}
+                                </p>
+
+                                <p><span class="right-title-text">Final Score:</span> &nbsp{{ answer.final_score }}</p>
+
+
+                                <p hidden>{{ form.answer_id }}</p>
+                                <br>
+
+                                <button type="submit" value="Submit" class="btn btn-success">Submit</button>
+                            </div>
+                            <div class="col-6"><span class="right-title-text">Select which value will be the final score:</span>&nbsp
+                                <div style="padding-left: 20px">{% for choice in form.final_score %}
+                                    <span class="radio" style="margin-bottom: 0px">{{ choice.tag }}</span>
+                                    {{ choice.choice_label }}
+
+                                {% endfor %}</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}
