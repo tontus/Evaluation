@@ -78,23 +78,35 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
             </div>
             <ul class="agile_forms">
-                <li>
-                    <a href="{% url 'login' %}">
-                        <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</a>
-                </li>
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#myModal3">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up</a>
-                </li>
+                {% if user.is_authenticated %}
+                    <li>
+                       <strong style="color: #f8f8f8;">Logged in as {{ user.username }}</strong>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a>
+                    </li>
+                {% else %}
+
+                    <li>
+                        <a href="{% url 'login' %}">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#myModal3">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up</a>
+                    </li>
+                {% endif %}
+
             </ul>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                 <nav>
                     <ul class="nav navbar-nav">
                         {% if user.is_authenticated and user.is_teacher %}
-                            {% url 'teachers:questions' as home_url%}
+                            {% url 'teachers:questions' as home_url %}
                         {% else %}
-                            {% url 'students:questions' as home_url%}
+                            {% url 'students:questions' as home_url %}
                         {% endif %}
 
                         {% url 'leaderboard' as leaderboard_url %}
