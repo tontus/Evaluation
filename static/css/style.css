@@ -2508,4 +2508,7 @@ canvas.particles-js-canvas-el{
     font-size: 20px;
 	}
 }
+.right-title-text{
+    font-weight: bold;
+}
 /*-- /responsive design --*/
