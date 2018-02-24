@@ -2511,4 +2511,26 @@ canvas.particles-js-canvas-el{
 .right-title-text{
     font-weight: bold;
 }
+.helptext, .helptext ul{
+    margin: 0 10px auto 20px;
+    display: block;
+    font-size: 0.9em;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+.errorlist li{
+    padding: 10px;
+    list-style-type: none;
+    border: 1px solid #ff5722;
+    color: #ff5722;
+}
+
+.ordered-list{
+    display: list-item;
+}
+.ordered-list-group{
+    list-style: decimal inside;
+}
+
 /*-- /responsive design --*/
