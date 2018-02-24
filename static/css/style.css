@@ -10,8 +10,8 @@
 body {
 	padding: 0;
 	margin: 0;
-	background: #FFF;
-	font-family: 'open Sans', sans-serif;
+    background: url("../img/background.png")  fixed;
+    font-family: 'open Sans', sans-serif;
 }
 body a {
 	transition: 0.5s all;
