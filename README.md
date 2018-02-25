@@ -7,11 +7,13 @@
 	* [Other](https://redis.io/download) 
 * Run `$ pip install -r requirements.txt` to install otherr requirements
 * nltk dependencies 'brown', 'punkt', 'wordnet'
-	`$ python
+	```
+	$ python
 	>>> import nltk
 	>>> nltk.download('brown')
 	>>> nltk.download('punkt')
-	>>> nltk.download('wordnet')`
+	>>> nltk.download('wordnet')
+	```
 
 ## Usage
 * Run `$ redis-server`
