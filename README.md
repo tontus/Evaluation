@@ -19,3 +19,4 @@
 * Run `$ redis-server`
 * Open another terminal in the project folder and run `$ python manage.py runserver`
 * Open another terminal in the project folder and run `$ celery worker -A Evaluation --loglevel=debug --concurrency=4`
+* Use [ngork](https://ngrok.com/) to access from other pc.
