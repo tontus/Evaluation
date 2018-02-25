@@ -19,9 +19,10 @@ def home(request):
 
 
 def leaderboard(request):
-    data = []
-
+    student_data = []
+    count = []
     students = Student.objects.all()
+    i = 1
     for student in students:
         total = 0
         total_marks = 0
@@ -29,6 +30,8 @@ def leaderboard(request):
         temp = []
         answer_count = 0
         if answers.count() > 0:
+            count.append(i)
+            i += 1
             for answer in answers:
                 full_marks = answer.question.marks
                 final_score = answer.final_score
@@ -41,9 +44,9 @@ def leaderboard(request):
                 percentage = total / total_marks * 100
             temp.append(student)
             temp.append(answer_count)
-            temp.append(total)
+            temp.append(round(total,2))
             temp.append(round(percentage, 2))
-            data.append(temp)
-    data = sorted(data, key=lambda l: l[2], reverse=True)
-
+            student_data.append(temp)
+    student_data = sorted(student_data, key=lambda l: l[2], reverse=True)
+    data = zip(count, student_data)
     return render(request, 'classroom/leaderboard.html', {'data': data})

@@ -2526,11 +2526,12 @@ canvas.particles-js-canvas-el{
     color: #ff5722;
 }
 
-.ordered-list{
-    display: list-item;
+.colored-card-header{
+	background-color: #1ed88b;
+	color: #FFFFFF;
 }
-.ordered-list-group{
-    list-style: decimal inside;
-}
+.colored-award{
 
+	color: #ffc107;
+}
 /*-- /responsive design --*/

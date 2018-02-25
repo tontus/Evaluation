@@ -5,7 +5,8 @@
         <div class="card" style="margin-bottom: 20px; ">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-6"><h5><strong>Question:</strong> {{ question.question }}</h5>
+                    <div class="col-6"><h3><strong>Question:</strong> {{ question.question }}</h3>
+                        <br>
                         <p><span class="right-title-text">Marks: </span> &nbsp;{{ question.marks }}</p>
                         <p><span class="right-title-text">Model Answer: </span>&nbsp;{{ question.model_answer }}</p>
                     </div>
@@ -29,7 +30,8 @@
 
         {% for answer,form in list %}
             <div class="card" style="margin-bottom: 20px; ">
-                <h3 class="card-title"><span style="background-color: #1dba79; color: #FFFFFF">&nbsp;Registration no: </span>
+                <h3 class="card-title"><span
+                        style="background-color: #1dba79; color: #FFFFFF">&nbsp;Registration no: </span>
                     &nbsp {{ answer.student.reg_no }}</h3>
                 <div class="card-body">
                     <form action="" method="post">
@@ -51,7 +53,13 @@
                                     {% endif %}
                                 </p>
 
-                                <p><span class="right-title-text">Final Score:</span> &nbsp{{ answer.final_score }}</p>
+                                <p><span class="right-title-text">Final Score:</span> &nbsp
+                                    {% if answer.final_score != -1 %}
+                                        {{ answer.final_score }}
+
+                                    {% else %}
+                                        --
+                                    {% endif %}</p>
 
 
                                 <p hidden>{{ form.answer_id }}</p>

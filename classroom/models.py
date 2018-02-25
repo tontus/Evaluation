@@ -31,7 +31,7 @@ class Answer(models.Model):
     text = models.TextField('Answer')
     calculated_score = models.FloatField(default=-1)
     given_score = models.FloatField(default=0)
-    final_score = models.FloatField(default=0)
+    final_score = models.FloatField(default=-1)
 
     def __str__(self):
         return str(self.student.reg_no)
