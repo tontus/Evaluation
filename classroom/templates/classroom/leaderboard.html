@@ -2,29 +2,42 @@
 
 {% block content %}
 
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col">Username</div>
-                <div class="col">Score</div>
-                <div class="col">Answered</div>
-                <div class="col">Percentage</div>
 
-            </div>
-            <ol class="list-group ordered-list-group" start="1">
-                {% for datum in data %}
-                    <li class="list-group-item ordered-list">
-                        <div class="row">
-                            <div class="col">{{ datum.0.user.username }}</div>
-                            <div class="col">{{ datum.2 }}</div>
-                            <div class="col">{{ datum.1 }}</div>
-                            <div class="col">{{ datum.3 }}%</div>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="card col-8">
+            <div class="card-body ">
+
+                <ul class="list-group">
+                    <li class="list-group-item colored-card-header">
+                        <div class="row ">
+                            <div class="col"><h4><strong>#</strong></h4></div>
+                            <div class="col"><h4><strong>Username</strong></h4></div>
+                            <div class="col"><h4><strong>Score</strong></h4></div>
+                            <div class="col"><h4><strong>Answered</strong></h4></div>
+                            <div class="col"><h4><strong>Percentage</strong></h4></div>
 
                         </div>
                     </li>
-                {% endfor %}
+                    {% for position, datum in data %}
+                        <li class="list-group-item ">
+                            <div class="row">
+                                <div class="col">{% if position == 1 or position == 2 or position == 3 %}
+                                <i class="icon-award colored-award"></i>
+                                {% endif %}{{ position }}</div>
+                                <div class="col">{{ datum.0.user.username }}</div>
+                                <div class="col">{{ datum.2 }}</div>
+                                <div class="col">{{ datum.1 }}</div>
+                                <div class="col">{{ datum.3 }}%</div>
 
-            </ol>
+                            </div>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
         </div>
+        <div class="col-2"></div>
     </div>
+
 {% endblock %}

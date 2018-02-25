@@ -18,7 +18,7 @@
             <div class="col-4"></div>
             <div class="col-4">
                 <div class="card">
-                    <div class="card-header" style="background-color: #1ed88b"><h4><strong style="color: #FFFFFF;">Sign In</strong></h4></div>
+                    <div class="card-header colored-card-header" ><h4><strong >Sign In</strong></h4></div>
                     <div class="card-body"><form method="post" action="/accounts/login/">
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ next }}">
