@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect, render
@@ -16,6 +17,7 @@ def login_view(request):
             if user.is_student:
                 return redirect('students:questions')
         else:
+            messages.error(request, "Enter Correct Username and password!")
             return render(request, 'registration/login.html', {'form': form})
     else:
 
