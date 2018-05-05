@@ -20,10 +20,8 @@ numpy==1.13.3
 portend==2.2
 pylint==1.8.1
 pyparsing==2.2.0
-pypiwin32==222
 python-dateutil==2.6.1
 pytz==2017.3
-pywin32==222
 redis==2.10.6
 scipy==1.0.0
 six==1.11.0
